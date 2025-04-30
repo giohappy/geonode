@@ -92,6 +92,7 @@ class MetadataManager:
 
         instance = {}
         errors = {}
+        required = schema.get("required", [])
         for fieldname, subschema in schema["properties"].items():
             # logger.debug(f"build_schema_instance: getting handler for property {fieldname}")
             handler_id = subschema.get("geonode:handler", None)
@@ -101,7 +102,8 @@ class MetadataManager:
             handler = self.handlers[handler_id]
             try:
                 content = handler.get_jsonschema_instance(resource, fieldname, context, errors, lang)
-                instance[fieldname] = content
+                if content is not None or fieldname in required:
+                    instance[fieldname] = content
             except UnsetFieldException:
                 pass
 
