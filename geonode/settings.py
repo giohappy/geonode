@@ -418,6 +418,7 @@ GEONODE_APPS_NAV_MENU_ENABLE = ast.literal_eval(os.getenv("GEONODE_APPS_NAV_MENU
 
 GEONODE_INTERNAL_APPS = (
     # GeoNode internal apps
+    "geonode.admin.apps.GeoNodeAdminConfig",
     "geonode.people",
     "geonode.client",
     "geonode.themes",
@@ -455,18 +456,17 @@ INSTALLED_APPS = (
     "modeltranslation",
     "dal",
     "dal_select2",
-    "grappelli",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.sites",
-    "django.contrib.admin",
     "django.contrib.sitemaps",
     "whitenoise.runserver_nostatic",
     "django.contrib.staticfiles",
     "django.contrib.messages",
     "django.contrib.humanize",
     "django.contrib.gis",
+    "admin_auto_filters",
     "sequences.apps.SequencesConfig",
     # Utility
     "dj_pagination",
@@ -594,8 +594,6 @@ DYNAMIC_REST = {
     # path registered, links will default back to being resource-relative urls
     "ENABLE_HOST_RELATIVE_LINKS": True,
 }
-
-GRAPPELLI_ADMIN_TITLE = os.getenv("GRAPPELLI_ADMIN_TITLE", "GeoNode")
 
 # Documents application
 try:

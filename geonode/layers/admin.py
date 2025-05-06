@@ -18,6 +18,7 @@
 #########################################################################
 
 from django.contrib import admin
+from admin_auto_filters.filters import AutocompleteFilter
 
 from modeltranslation.admin import TabbedTranslationAdmin
 
@@ -33,6 +34,11 @@ class DatasetAdminForm(ResourceBaseAdminForm):
     class Meta(ResourceBaseAdminForm.Meta):
         model = Dataset
         fields = "__all__"
+
+
+class CategoryFilter(AutocompleteFilter):
+    title = "Category"  # display title
+    field_name = "category"  # name of the foreign key field
 
 
 class DatasetAdmin(TabbedTranslationAdmin):
@@ -55,7 +61,7 @@ class DatasetAdmin(TabbedTranslationAdmin):
     list_filter = (
         "subtype",
         "owner",
-        "category",
+        CategoryFilter,
         "group",
         "restriction_code_type__identifier",
         "date",
@@ -65,6 +71,7 @@ class DatasetAdmin(TabbedTranslationAdmin):
         "state",
         "dirty_state",
     )
+    autocomplete_fields = ["category"]
     search_fields = ("alternate", "title", "abstract", "purpose", "is_approved", "is_published", "state")
     filter_horizontal = ("contacts",)
     date_hierarchy = "date"
