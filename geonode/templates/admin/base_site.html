@@ -19,7 +19,8 @@
             --default-button-bg:  var(--primary);
             --default-button-hover-bg: #306d9c;
             --button-hover-bg: #306d9c;
-            --header-link-color: #ffffff
+            --header-link-color: #ffffff;
+            --font-family-primary: "Montserrat", sans-serif;
         }
 
         #branding h1 > a {
@@ -40,7 +41,10 @@
         .theme-toggle svg.theme-icon-when-auto, .theme-toggle svg.theme-icon-when-dark, .theme-toggle svg.theme-icon-when-light {
             fill: var(--primary);
         }
-        
-        
+
+        #nav-sidebar .current-app .section:link, #nav-sidebar .current-app .section:visited {
+            background-color: var(--primary);
+            color: #ffffff;
+        }
     </style>
 {% endblock %}
