@@ -1,19 +1,31 @@
-{% extends "admin/base_site.html" %}
-{% load admin_interface_tags i18n static %}
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block title %}{{ title }} | {{ site_title|default:_('GeoNode site admin') }}{% endblock %}
+
 {% block branding %}
-{% get_admin_interface_theme as theme %}
 <h1 id="site-name">
-    <a href="{% url 'admin:index' %}">
-        {% if theme.logo_visible %}
-            {% if theme.logo %}
-            <img class="logo" style="display:none;" src="{{ theme.logo.url }}" {% if theme.logo.width %}width="{{ theme.logo.width }}"{% endif %} {% if theme.logo.height %}height="{{ theme.logo.height }}"{% endif %}>
-            {% else %}
-            <img src="{% block logo_src %}/static/mapstore/img/geonode-logo.svg{% endblock %}" style="height:2.5rem; margin-right:.4rem;">
-            {% endif %}
-        {% endif %}
-        {% if theme.title_visible %}
-        <span>{% if theme.title %}{% translate theme.title %}{% else %}{{ site_header|default:_('Django administration') }}{% endif %}</span>
-        {% endif %}
-    </a>
+    <img src="{% static 'mapstore/img/geonode-logo.svg' %}" style="margin-right: .4rem;height: 2.5rem;width: auto;">
+    <a href="{% url 'admin:index' %}">{{ site_header|default:_('GeoNode administration') }}</a>
 </h1>
-{% endblock branding %}
+{% endblock %}
+{% block extrastyle %}
+    <style type="text/css">
+        html[data-theme="light"],
+        :root {
+            --primary: #397aab;
+            --header-bg: #ffffff;
+            --header-color:  var(--primary)
+            --header-branding-color: #ffffff;
+            --accent:  var(--primary);
+            --default-button-bg:  var(--primary)
+            --default-button-hover-bg: #306d9c;
+            --button-hover-bg: #306d9c;
+            --header-link-color: var(--primary)
+        }
+
+        h1#site-name a {
+            font-weight: 400;
+        }
+    </style>
+{% endblock %}

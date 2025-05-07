@@ -469,8 +469,6 @@ INSTALLED_APPS = (
     "admin_auto_filters",
     "sequences.apps.SequencesConfig",
     # Utility
-    "admin_interface",
-    "colorfield",
     "dj_pagination",
     "taggit",
     "treebeard",
