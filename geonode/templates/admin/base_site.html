@@ -4,10 +4,8 @@
 {% block title %}{{ title }} | {{ site_title|default:_('GeoNode site admin') }}{% endblock %}
 
 {% block branding %}
-<h1 id="site-name">
-    <img src="{% static 'mapstore/img/geonode-logo.svg' %}" style="margin-right: .4rem;height: 2.5rem;width: auto;">
-    <a href="{% url 'admin:index' %}">{{ site_header|default:_('GeoNode administration') }}</a>
-</h1>
+<img src="{% static 'mapstore/img/geonode-logo.svg' %}">
+<h1 id="site-name"><a href="{% url 'admin:index' %}">{{ site_header|default:_('GeoNode administration') }}</a></h1>
 {% endblock %}
 {% block extrastyle %}
     <style type="text/css">
@@ -15,17 +13,34 @@
         :root {
             --primary: #397aab;
             --header-bg: #ffffff;
-            --header-color:  var(--primary)
+            --header-color:  var(--primary);
             --header-branding-color: #ffffff;
             --accent:  var(--primary);
-            --default-button-bg:  var(--primary)
+            --default-button-bg:  var(--primary);
             --default-button-hover-bg: #306d9c;
             --button-hover-bg: #306d9c;
-            --header-link-color: var(--primary)
+            --header-link-color: #ffffff
         }
 
-        h1#site-name a {
+        #branding h1 > a {
             font-weight: 400;
         }
+
+        #branding img {
+            margin-right: 1rem;
+            height: 2.5rem;
+            width: auto;
+            transform: translateY(-2px);
+        }
+
+        #header a:link, #header a:visited, #logout-form button {
+            color: var(--primary);
+        }
+
+        .theme-toggle svg.theme-icon-when-auto, .theme-toggle svg.theme-icon-when-dark, .theme-toggle svg.theme-icon-when-light {
+            fill: var(--primary);
+        }
+        
+        
     </style>
 {% endblock %}
