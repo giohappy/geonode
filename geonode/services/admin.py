@@ -20,6 +20,11 @@
 from django.contrib import admin
 
 from geonode.base.admin import ResourceBaseAdminForm
+from unfold.contrib.filters.admin import (
+    AutocompleteSelectFilter,
+    AutocompleteSelectMultipleFilter,
+    RelatedDropdownFilter 
+)
 
 from . import models
 
@@ -34,7 +39,7 @@ class ServiceAdmin(admin.ModelAdmin):
     exclude = ("ll_bbox_polygon", "bbox_polygon", "srid")
     list_display = ("id", "name", "base_url", "type", "method")
     list_display_links = ("id", "name")
-    list_filter = ("id", "name", "type", "method")
+    list_filter = ("id", "name", "type", "method", ["harvester",RelatedDropdownFilter ])
     form = ServiceAdminForm
 
 

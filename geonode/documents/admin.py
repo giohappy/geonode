@@ -18,8 +18,7 @@
 #########################################################################
 
 from django.contrib import admin
-
-from modeltranslation.admin import TabbedTranslationAdmin
+from unfold.admin import ModelAdmin
 
 from geonode.documents.models import Document
 from geonode.base.admin import ResourceBaseAdminForm
@@ -34,7 +33,7 @@ class DocumentAdminForm(ResourceBaseAdminForm):
         # )
 
 
-class DocumentAdmin(TabbedTranslationAdmin):
+class DocumentAdmin(ModelAdmin):
     exclude = ("ll_bbox_polygon", "bbox_polygon", "srid", "tkeywords")
     list_display = (
         "id",

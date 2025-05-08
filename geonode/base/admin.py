@@ -82,12 +82,14 @@ class LicenseAdmin(TabbedTranslationAdmin):
     model = License
     list_display = ("id", "name")
     list_display_links = ("name",)
+    search_fields = ("name",)
 
 
 class TopicCategoryAdmin(TabbedTranslationAdmin):
     model = TopicCategory
     list_display_links = ("identifier",)
     list_display = ("identifier", "description", "gn_description", "fa_class", "is_choice")
+    search_fields = ("description",)
     if settings.MODIFY_TOPICCATEGORY is False:
         exclude = (
             "identifier",

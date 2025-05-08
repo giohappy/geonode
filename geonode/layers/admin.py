@@ -18,6 +18,12 @@
 #########################################################################
 
 from django.contrib import admin
+from unfold.admin import ModelAdmin, TabularInline
+from unfold.contrib.filters.admin import (
+    AutocompleteSelectFilter,
+    AutocompleteSelectMultipleFilter,
+    RelatedDropdownFilter 
+)
 
 from modeltranslation.admin import TabbedTranslationAdmin
 
@@ -25,7 +31,7 @@ from geonode.base.admin import ResourceBaseAdminForm
 from geonode.layers.models import Dataset, Attribute, Style
 
 
-class AttributeInline(admin.TabularInline):
+class AttributeInline(TabularInline):
     model = Attribute
 
 
@@ -35,7 +41,7 @@ class DatasetAdminForm(ResourceBaseAdminForm):
         fields = "__all__"
 
 
-class DatasetAdmin(TabbedTranslationAdmin):
+class DatasetAdmin(ModelAdmin):
     exclude = ("ll_bbox_polygon", "bbox_polygon", "srid", "tkeywords")
     list_display = (
         "id",
@@ -55,7 +61,8 @@ class DatasetAdmin(TabbedTranslationAdmin):
     list_filter = (
         "subtype",
         "owner",
-        "category",
+        ["category", RelatedDropdownFilter],
+        ["license", RelatedDropdownFilter],
         "group",
         "restriction_code_type__identifier",
         "date",
@@ -83,7 +90,7 @@ class DatasetAdmin(TabbedTranslationAdmin):
             resource_manager.delete(obj.uuid, instance=obj)
 
 
-class AttributeAdmin(admin.ModelAdmin):
+class AttributeAdmin(ModelAdmin):
     model = Attribute
     list_display_links = ("id",)
     list_display = ("id", "dataset", "attribute", "description", "attribute_label", "attribute_type", "display_order")
@@ -94,7 +101,7 @@ class AttributeAdmin(admin.ModelAdmin):
     )
 
 
-class StyleAdmin(admin.ModelAdmin):
+class StyleAdmin(ModelAdmin):
     model = Style
     list_display_links = ("sld_title",)
     list_display = ("id", "name", "sld_title", "workspace", "sld_url")

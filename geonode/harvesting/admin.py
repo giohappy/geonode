@@ -75,6 +75,8 @@ class HarvesterAdmin(admin.ModelAdmin):
 
     list_editable = ("scheduling_enabled",)
 
+    search_fields = ("name",)
+
     actions = [
         "update_harvester_availability",
         "initiate_update_harvestable_resources",

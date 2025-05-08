@@ -455,11 +455,17 @@ INSTALLED_APPS = (
     "modeltranslation",
     "dal",
     "dal_select2",
-    "grappelli",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.sites",
+    "unfold",  # before django.contrib.admin
+    "unfold.contrib.filters",  # optional, if special filters are needed
+    "unfold.contrib.forms",  # optional, if special form elements are needed
+    "unfold.contrib.inlines",  # optional, if special inlines are needed
+    "unfold.contrib.import_export",  # optional, if django-import-export package is used
+    "unfold.contrib.guardian",  # optional, if django-guardian package is used
+    "unfold.contrib.simple_history",
     "django.contrib.admin",
     "django.contrib.sitemaps",
     "whitenoise.runserver_nostatic",
@@ -508,6 +514,48 @@ INSTALLED_APPS = (
     # GeoNode
     "geonode",
 )
+
+from django.templatetags.static import static
+
+UNFOLD = {
+    "SITE_TITLE": "GeoNode Adminitration",
+    "SITE_HEADER": "GeoNode Adminitration",
+    "SITE_ICON": {
+        "light": lambda request: static("mapstore/img/geonode-logo.svg"),  # light mode
+        "dark": lambda request: static("mapstore/img/geonode-logo.svg"),  # dark mode
+    },
+    "SIDEBAR": {
+        "show_search": True
+    },
+    "COLORS": {
+        "base": {
+            "50": "249 250 251",
+            "100": "243 244 246",
+            "200": "229 231 235",
+            "300": "209 213 219",
+            "400": "156 163 175",
+            "500": "107 114 128",
+            "600": "75 85 99",
+            "700": "55 65 81",
+            "800": "31 41 55",
+            "900": "17 24 39",
+            "950": "3 7 18",
+        },
+        "primary": {
+            "50": "#397aab",
+            "100": "#397aab",
+            "200": "#397aab",
+            "300": "#397aab",
+            "400": "#397aab",
+            "500": "#397aab",
+            "600": "#397aab",
+            "700": "#397aab",
+            "800": "#397aab",
+            "900": "#397aab",
+            "950": "#397aab",
+        },
+    }
+}
 
 markdown_white_listed_tags = [
     "a",
